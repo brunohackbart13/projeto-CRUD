@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de peças</title>
+    <!-- Adicionando Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Lista de peças</h1>
+    <style>
+        /* Estilo para centralizar o h1 */
+        h1 {
+            text-align: center;
+        }
+    </style>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>NOME</th>
+            <th>EQUIPAMENTO</th>
+            <th>PESO</th>
+            <th>VALOR</th>
+            <th>AÇÕES</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="peca : ${lista}">
+            <td th:text="${peca.nome}"></td>
+            <td th:text="${peca.equipamento}"></td>
+            <td th:text="${peca.peso}"></td>
+            <td th:text="${peca.valor}"></td>
+            <td>
+                <a th:href="@{/pecas/cadastro(id=${peca.id})}" class="btn btn-info btn-sm">Editar</a>
+                <form action="/pecas" method="post" style="display: inline;">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="id" th:value="${peca.id}">
+                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/pecas/cadastro" class="btn btn-primary mb-3">Novo</a>
+</div>
+
+<!-- Scripts Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
